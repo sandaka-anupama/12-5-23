@@ -1,0 +1,38 @@
+import math
+n=10000001
+x=int(math.sqrt(n))
+sieve=[1]*n
+sieve[0]=0
+sieve[1]=0
+for i in range(2,x+1):
+        if sieve[i]==1:
+                for j in range(i*i,n,i):
+                        sieve[j]=0
+#index: 1  2  3  4  5  6  7   8  9  10
+#sieve: 0  1  1  0  1  0  1   0  0  0
+#prefix:0  1  2  2  3  3  4   4  4  4
+pf=[0]*n
+for i in range(2,n):#10
+        if sieve[i]==1:
+                pf[i]=pf[i-1]+1
+        else:
+                pf[i]=pf[i-1]
+
+t=int(input())
+for i in range(1,t+1):
+        m=int(input())
+        print(pf[m])
+
+
+
+class NumArray:
+
+    def _init_(self, arr):
+        n=len(arr)
+        self.pf=[0]*(n+1)
+        self.pf[0]=arr[0]
+        for i in range(1,n):
+            self.pf[i]=pf[i-1]+arr[i]
+
+    def sumRange(self,l,r):#2,5
+        return self.pf[r]-self.pf[l-1]
